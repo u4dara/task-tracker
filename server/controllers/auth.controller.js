@@ -15,6 +15,7 @@ const generateToken = (id) => {
 
 // @des	   SIGN-UP a new User
 // @route   POST /api/v1/auth/sign-up
+// @access  Public
 export const signUp = asyncHandler(async (req, res) => {
    const session = await mongoose.startSession();
    await session.startTransaction();
@@ -63,6 +64,7 @@ export const signUp = asyncHandler(async (req, res) => {
 
 // @des	   SIGN-IN a User
 // @route   POST /api/v1/auth/sign-in
+// @access  Public
 export const signIn = asyncHandler(async (req, res) => {
    const { email, password } = req.body;
 
@@ -102,6 +104,7 @@ export const signIn = asyncHandler(async (req, res) => {
 
 // @des	   SIGN-OUT a User
 // @route   POST /api/v1/auth/sign-out
+// @access  Private
 export const signOut = asyncHandler(async (req, res) => {
    res.status(200).json({
       success: true,
