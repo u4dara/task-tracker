@@ -1,0 +1,46 @@
+import { NavLink } from 'react-router-dom';
+import { LuListTodo } from 'react-icons/lu';
+
+const NavBar = () => {
+   const linkClass = ({ isActive }) =>
+      isActive
+         ? 'border-b-2 border-black text-white py-2 text-md'
+         : 'text-white py-2 hover:border-b-2 hover:border-gray-600';
+
+   return (
+      <nav className="bg-theme-default border-b border-theme-border">
+         <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+            <div className="flex h-18 items-center justify-between gap-x-8">
+               <div className="flex shrink-0 items-center mr-4">
+                  <LuListTodo className="h-8 w-auto" />
+                  <span className="hidden md:block text-white text-2xl font-bold ml-2">
+                     Task Tracker
+                  </span>
+               </div>
+               <div className="flex justify-center space-x-4">
+                  <NavLink to="/" className={linkClass}>
+                     Dashboard
+                  </NavLink>
+                  <NavLink to="/jobs" className={linkClass}>
+                     Tasks
+                  </NavLink>
+                  <NavLink to="/add-job" className={linkClass}>
+                     Profile
+                  </NavLink>
+               </div>
+
+               <div className="flex justify-center items-center">
+                  <NavLink
+                     to="/auth/sign-in"
+                     className="bg-black text-white py-2 px-4 rounded-md hover:bg-gray-700"
+                  >
+                     Sign in
+                  </NavLink>
+               </div>
+            </div>
+         </div>
+      </nav>
+   );
+};
+
+export default NavBar;

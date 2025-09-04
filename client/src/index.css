@@ -1,1 +1,11 @@
 @import "tailwindcss";
+
+@theme{
+  --color-theme-border: #e27070;
+  --color-theme-light: #ec504d;
+  --color-theme-default: #f04032;
+  --color-theme-dark: #cf2a2b;
+  --color-input-outline: #54bac1;
+
+
+}
