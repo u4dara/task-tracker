@@ -1,6 +1,7 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { LuListTodo } from 'react-icons/lu';
+import { FaSignInAlt, FaSignOutAlt } from 'react-icons/fa';
 
 import { signOut, reset } from '../features/auth/authSlice.js';
 
@@ -13,7 +14,7 @@ const NavBar = () => {
    const onSignOut = () => {
       dispatch(signOut());
       dispatch(reset());
-      navigate('/');
+      navigate('/auth/sign-in');
    };
 
    const linkClass = ({ isActive }) =>
@@ -46,16 +47,18 @@ const NavBar = () => {
                <div className="flex justify-center items-center">
                   {user ? (
                      <button
-                        className="bg-black text-white py-2 px-4 rounded-md hover:bg-gray-700"
+                        className="flex justify-center items-center gap-1.5 bg-black text-white py-2 px-3 rounded-md hover:bg-gray-700"
                         onClick={onSignOut}
                      >
+                        <FaSignOutAlt />
                         Sign out
                      </button>
                   ) : (
                      <NavLink
                         to="/auth/sign-in"
-                        className="bg-black text-white py-2 px-4 rounded-md hover:bg-gray-700"
+                        className="flex justify-center items-center gap-1.5 bg-black text-white py-2 px-3 rounded-md hover:bg-gray-700"
                      >
+                        <FaSignInAlt />
                         Sign in
                      </NavLink>
                   )}

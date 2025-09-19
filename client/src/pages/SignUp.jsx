@@ -3,7 +3,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { FaUser } from 'react-icons/fa';
 import { toast } from 'react-toastify';
-import { signIn, reset } from '../features/auth/authSlice.js';
+import { signUp, reset } from '../features/auth/authSlice.js';
 
 import Spinner from '../components/Spinner.jsx';
 
@@ -52,7 +52,7 @@ const SignUp = () => {
             email,
             password,
          };
-         dispatch(signIn(userData));
+         dispatch(signUp(userData));
       }
    };
 

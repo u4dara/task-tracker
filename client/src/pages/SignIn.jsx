@@ -1,6 +1,10 @@
 import { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import { signIn, reset } from '../features/auth/authSlice.js';
 import { FaSignInAlt } from 'react-icons/fa';
+import Spinner from '../components/Spinner.jsx';
 
 const SignIn = () => {
    const [formData, setFormData] = useState({
@@ -9,6 +13,23 @@ const SignIn = () => {
    });
 
    const { email, password } = formData;
+
+   const navigate = useNavigate();
+   const dispatch = useDispatch();
+
+   const { user, isLoading, isError, isSuccess, message } = useSelector(
+      (state) => state.auth
+   );
+
+   useEffect(() => {
+      if (isError) {
+         toast.error(message);
+      }
+      if (isSuccess || user) {
+         navigate('/');
+      }
+      dispatch(reset());
+   }, [user, isError, isSuccess, message, navigate, dispatch]);
 
    const onChange = (e) => {
       setFormData((prevState) => ({
@@ -19,9 +40,22 @@ const SignIn = () => {
 
    const onSubmit = (e) => {
       e.preventDefault();
+
+      const userData = {
+         email,
+         password,
+      };
+
+      dispatch(signIn(userData));
    };
 
-   return (
+   return isLoading ? (
+      <>
+         <div className="flex justify-center items-center h-screen bg-gray-200">
+            <Spinner loading={true} />
+         </div>
+      </>
+   ) : (
       <>
          <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
