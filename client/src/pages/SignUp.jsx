@@ -1,6 +1,11 @@
 import { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import { FaUser } from 'react-icons/fa';
+import { toast } from 'react-toastify';
+import { signIn, reset } from '../features/auth/authSlice.js';
+
+import Spinner from '../components/Spinner.jsx';
 
 const SignUp = () => {
    const [formData, setFormData] = useState({
@@ -12,6 +17,23 @@ const SignUp = () => {
 
    const { name, email, password, confirmPassword } = formData;
 
+   const navigate = useNavigate();
+   const dispatch = useDispatch();
+
+   const { user, isLoading, isError, isSuccess, message } = useSelector(
+      (state) => state.auth
+   );
+
+   useEffect(() => {
+      if (isError) {
+         toast.error(message);
+      }
+      if (isSuccess || user) {
+         navigate('/');
+      }
+      dispatch(reset());
+   }, [user, isError, isSuccess, message, navigate, dispatch]);
+
    const onChange = (e) => {
       setFormData((prevState) => ({
          ...prevState,
@@ -21,9 +43,26 @@ const SignUp = () => {
 
    const onSubmit = (e) => {
       e.preventDefault();
+
+      if (password !== confirmPassword) {
+         toast.error("Passwords don't match");
+      } else {
+         const userData = {
+            name,
+            email,
+            password,
+         };
+         dispatch(signIn(userData));
+      }
    };
 
-   return (
+   return isLoading ? (
+      <>
+         <div className="flex justify-center items-center h-screen bg-gray-200">
+            <Spinner loading={true} />
+         </div>
+      </>
+   ) : (
       <>
          <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">

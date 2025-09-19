@@ -1,5 +1,6 @@
 import express from 'express';
 import colors from 'colors';
+import cors from 'cors';
 
 import { PORT } from './configs/env.js';
 import errorMiddleware from './middlewares/error.middleware.js';
@@ -12,6 +13,7 @@ const app = express();
 
 // Middleware
 app.use(express.json());
+app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 
 // Routes

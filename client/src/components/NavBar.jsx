@@ -1,7 +1,21 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import { LuListTodo } from 'react-icons/lu';
 
+import { signOut, reset } from '../features/auth/authSlice.js';
+
 const NavBar = () => {
+   const navigate = useNavigate();
+   const dispatch = useDispatch();
+
+   const { user } = useSelector((state) => state.auth);
+
+   const onSignOut = () => {
+      dispatch(signOut());
+      dispatch(reset());
+      navigate('/');
+   };
+
    const linkClass = ({ isActive }) =>
       isActive
          ? 'border-b-2 border-black text-white py-2 text-md'
@@ -30,12 +44,21 @@ const NavBar = () => {
                </div>
 
                <div className="flex justify-center items-center">
-                  <NavLink
-                     to="/auth/sign-in"
-                     className="bg-black text-white py-2 px-4 rounded-md hover:bg-gray-700"
-                  >
-                     Sign in
-                  </NavLink>
+                  {user ? (
+                     <button
+                        className="bg-black text-white py-2 px-4 rounded-md hover:bg-gray-700"
+                        onClick={onSignOut}
+                     >
+                        Sign out
+                     </button>
+                  ) : (
+                     <NavLink
+                        to="/auth/sign-in"
+                        className="bg-black text-white py-2 px-4 rounded-md hover:bg-gray-700"
+                     >
+                        Sign in
+                     </NavLink>
+                  )}
                </div>
             </div>
          </div>
