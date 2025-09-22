@@ -76,11 +76,6 @@ export const taskSlice = createSlice({
             state.isLoading = false;
             state.isError = true;
             state.tasks = action.payload;
-         })
-         .addCase(getTasks.rejected, (state, action) => {
-            state.isLoading = false;
-            state.isError = true;
-            state.message = action.payload;
          });
    },
 });

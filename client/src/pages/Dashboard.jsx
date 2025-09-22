@@ -27,10 +27,16 @@ const Dashboard = () => {
 
       return () => {
          dispatch(reset());
-      }
+      };
    }, [user, navigate, isError, message, dispatch]);
 
-   return isLoading ?  (
+   return isLoading ? (
+      <>
+         <div className="flex justify-center items-center h-screen bg-gray-200">
+            <Spinner loading={true} />
+         </div>
+      </>
+   ) : (
       <>
          <section className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
             <div className="flex flex-col justify-center items-center">
