@@ -18,7 +18,7 @@ const TaskForm = () => {
    };
 
    return (
-      <section className="form w-full max-w-md">
+      <section className="mt-4 w-full max-w-lg">
          <form onSubmit={onSubmit}>
             <div className="flex flex-col gap-1.5">
                <label
@@ -35,7 +35,7 @@ const TaskForm = () => {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                />
-               <div className="mt-2">
+               <div className="mt-4">
                   <button
                      className="block w-full py-2 bg-black text-white rounded-md
                    transition-transform duration-150 ease-in-out
