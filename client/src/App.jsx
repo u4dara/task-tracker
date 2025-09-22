@@ -7,6 +7,7 @@ import {
 
 import MainLayout from './layouts/MainLayout.jsx';
 import AuthLayout from './layouts/AuthLayout.jsx';
+import NotFoundPage from './pages/NotFoundPage.jsx';
 import Dashboard from './pages/Dashboard.jsx';
 import SignUp from './pages/SignUp.jsx';
 import SignIn from './pages/SignIn.jsx';
@@ -24,6 +25,7 @@ const App = () => {
             <Route element={<AuthLayout />}>
                <Route path="/auth/sign-in" element={<SignIn />} />
                <Route path="/auth/sign-up" element={<SignUp />} />
+               <Route path="*" element={<NotFoundPage />} />
             </Route>
          </>
       )

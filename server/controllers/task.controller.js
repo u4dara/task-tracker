@@ -47,13 +47,12 @@ export const updateTask = asyncHandler(async (req, res) => {
       throw new Error(`Task with id ${req.params.id} not found`);
    }
 
-   const user = await User.findById(req.user.id);
-   if (!user) {
+   if (!req.user) {
       res.status(401);
       throw new Error('User not found');
    }
 
-   if (String(task.user) !== user.id) {
+   if (String(task.user) !== req.user.id) {
       res.status(401);
       throw new Error('User not authorized');
    }
@@ -73,13 +72,12 @@ export const deleteTask = asyncHandler(async (req, res) => {
       throw new Error(`Task with id ${req.params.id} not found`);
    }
 
-   const user = await User.findById(req.user.id);
-   if (!user) {
+   if (!req.user) {
       res.status(401);
       throw new Error('User not found');
    }
 
-   if (String(task.user) !== user.id) {
+   if (String(task.user) !== req.user.id) {
       res.status(401);
       throw new Error('User not authorized');
    }

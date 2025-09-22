@@ -20,7 +20,7 @@ const protect = asyncHandler(async (req, res, next) => {
 
    const decoded = jwt.verify(token, JWT_SECRET);
 
-   const user = await User.findById(decoded.userId);
+   const user = await User.findById(decoded.userId).select('-password');
 
    if (!user) res.status(401).json({ message: 'Unauthorized Request' });
 

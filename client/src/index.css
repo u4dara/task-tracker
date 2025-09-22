@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+@layer base{
+  body{
+    @apply font-[Lato]
+  }
+}
+
 @theme{
   --color-theme-border: #e27070;
   --color-theme-light: #ec504d;

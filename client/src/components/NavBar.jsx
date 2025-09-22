@@ -12,9 +12,11 @@ const NavBar = () => {
    const { user } = useSelector((state) => state.auth);
 
    const onSignOut = () => {
-      dispatch(signOut());
-      dispatch(reset());
-      navigate('/auth/sign-in');
+      if (window.confirm('Are you sure you want to sign out?')) {
+         dispatch(signOut());
+         dispatch(reset());
+         navigate('/auth/sign-in');
+      }
    };
 
    const linkClass = ({ isActive }) =>
@@ -47,7 +49,7 @@ const NavBar = () => {
                <div className="flex justify-center items-center">
                   {user ? (
                      <button
-                        className="flex justify-center items-center gap-1.5 bg-black text-white py-2 px-3 rounded-md hover:bg-gray-700"
+                        className="flex justify-center items-center gap-1.5 bg-black text-white py-2 px-3 rounded-md hover:bg-gray-700 cursor-pointer"
                         onClick={onSignOut}
                      >
                         <FaSignOutAlt />
@@ -56,7 +58,7 @@ const NavBar = () => {
                   ) : (
                      <NavLink
                         to="/auth/sign-in"
-                        className="flex justify-center items-center gap-1.5 bg-black text-white py-2 px-3 rounded-md hover:bg-gray-700"
+                        className="flex justify-center items-center gap-1.5 bg-black text-white py-2 px-3 rounded-md hover:bg-gray-700 cursor-pointer"
                      >
                         <FaSignInAlt />
                         Sign in
