@@ -69,7 +69,9 @@ const Dashboard = () => {
                   ))}
                </div>
             ) : (
-               <h3>You have not set any tasks</h3>
+               <h3 className="mt-8 mx-auto max-w-7xl sm:px-6 lg:px-8 flex flex-col gap-3 justify-center items-center text-xl text-gray-600">
+                  - You have not set any tasks -
+               </h3>
             )}
          </section>
       </>

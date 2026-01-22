@@ -1,14 +1,14 @@
-import express from 'express';
-import colors from 'colors';
-import cors from 'cors';
+import express from "express";
+import colors from "colors";
+import cors from "cors";
 
-import { PORT } from './configs/env.js';
-import errorMiddleware from './middlewares/error.middleware.js';
-import arcjetMiddleware from './middlewares/arcjet.middleware.js';
-import connectToDatabase from './database/mongodb.js';
-import userRouter from './routes/user.routes.js';
-import taskRouter from './routes/task.routes.js';
-import authRouter from './routes/auth.routes.js';
+import { PORT } from "./configs/env.js";
+import errorMiddleware from "./middlewares/error.middleware.js";
+import arcjetMiddleware from "./middlewares/arcjet.middleware.js";
+import connectToDatabase from "./database/mongodb.js";
+import userRouter from "./routes/user.routes.js";
+import taskRouter from "./routes/task.routes.js";
+import authRouter from "./routes/auth.routes.js";
 
 const app = express();
 
@@ -19,18 +19,18 @@ app.use(express.urlencoded({ extended: false }));
 app.use(arcjetMiddleware);
 
 // Routes
-app.use('/api/v1/auth', authRouter);
-app.use('/api/v1/users', userRouter);
-app.use('/api/v1/tasks', taskRouter);
+app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/users", userRouter);
+app.use("/api/v1/tasks", taskRouter);
 
 app.use(errorMiddleware);
 
 // Server
 const startServer = async () => {
-   await connectToDatabase();
-   app.listen(PORT, () => {
-      console.log(`Server started on port: http://localhost:${PORT}`.yellow);
-   });
+	await connectToDatabase();
+	app.listen(PORT, () => {
+		console.log(`Server started on port: http://localhost:${PORT}`.yellow);
+	});
 };
 
 startServer();
